@@ -20,6 +20,11 @@ namespace Contexts.UI.View
             }
         }
 
+        public bool IsPanelExits(UIPanelType type)
+        {
+            return _panels.Find(x => x.Type == type) != null;
+        }
+        
         public void ShowPanel(UIPanelType type)
         {
             _panels.Find(x => x.Type == type).Show();

@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace Contexts.Base.Command
+namespace Contexts.Main.Command
 {
     public abstract class LoadContextCommand : strange.extensions.command.impl.Command
     {
@@ -23,7 +23,7 @@ namespace Contexts.Base.Command
         private void AsyncOperationOnCompletedHandler(AsyncOperation operation)
         {
             Debug.Log("Scene loaded: " + GetContextSceneName());
-            injectionBinder.GetInstance<HideUIPanelSignal>().Dispatch(UIPanelType.LoadingPanel);
+            // injectionBinder.GetInstance<HideUIPanelSignal>().Dispatch(UIPanelType.LoadingPanel);
             ContextLoadedHandler();
             Release();
         }

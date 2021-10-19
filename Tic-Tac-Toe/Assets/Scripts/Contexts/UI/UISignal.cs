@@ -15,5 +15,5 @@ namespace Contexts.UI
     public class UpdateUIPanelSignal : Signal<UIPanelType, UIPanelData> { }
     
     public class PlaceUIPanelSignal : Signal<UIPanelView> { }
-    public class LoadUIPanelSignal : Signal<string> { }
+    public class LoadUIPanelSignal : Signal<UIPanelType> { }
 }

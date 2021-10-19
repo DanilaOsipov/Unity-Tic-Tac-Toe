@@ -12,6 +12,7 @@ namespace Contexts.UI.View
         [Inject] public UIPanelHidedSignal UIPanelHidedSignal { get; set; }
         [Inject] public UpdateUIPanelSignal UpdateUIPanelSignal { get; set; }
         [Inject] public PlaceUIPanelSignal PlaceUIPanelSignal { get; set; }
+        [Inject] public LoadUIPanelSignal LoadUIPanelSignal { get; set; }
 
         public override void OnRegister()
         {
@@ -55,6 +56,10 @@ namespace Contexts.UI.View
 
         private void ShowUIPanelSignalHandler(UIPanelType type)
         {
+            if (!View.IsPanelExits(type))
+            {
+                LoadUIPanelSignal.Dispatch(type);
+            }
             View.ShowPanel(type);
         }
     }

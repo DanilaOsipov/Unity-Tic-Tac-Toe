@@ -1,6 +1,5 @@
 ﻿using Contexts.Base;
 using Contexts.Main.Command;
-using Contexts.UI.Command;
 using Contexts.UI.View;
 using UnityEngine;
 
@@ -15,6 +14,12 @@ namespace Contexts.UI
         protected override void UnbindOnRemove()
         {
             base.UnbindOnRemove();
+            injectionBinder.CrossContextBinder.Unbind<ShowUIPanelSignal>();
+            injectionBinder.CrossContextBinder.Unbind<HideUIPanelSignal>();
+            injectionBinder.CrossContextBinder.Unbind<UIPanelHidedSignal>();
+            injectionBinder.CrossContextBinder.Unbind<UpdateUIPanelSignal>();
+            injectionBinder.CrossContextBinder.Unbind<PlaceUIPanelSignal>();
+            injectionBinder.CrossContextBinder.Unbind<LoadUIPanelSignal>();
         }
 
         protected override void MapMediators()
@@ -32,20 +37,18 @@ namespace Contexts.UI
                 .To<LoadMainContextCommand>()
                 .InSequence()
                 .Once();
-
-            commandBinder.Bind<LoadUIPanelSignal>().To<LoadUIPanelCommand>();
         }
 
         protected override void MapEntities()
         {
             base.MapEntities();
             injectionBinder.Bind<StartSignal>().ToSingleton();
-            injectionBinder.Bind<ShowUIPanelSignal>().ToSingleton();
-            injectionBinder.Bind<HideUIPanelSignal>().ToSingleton();
-            injectionBinder.Bind<UIPanelHidedSignal>().ToSingleton();
-            injectionBinder.Bind<UpdateUIPanelSignal>().ToSingleton();
-            injectionBinder.Bind<PlaceUIPanelSignal>().ToSingleton();
-            injectionBinder.Bind<LoadUIPanelSignal>().ToSingleton();
+            injectionBinder.Bind<ShowUIPanelSignal>().ToSingleton().CrossContext();
+            injectionBinder.Bind<HideUIPanelSignal>().ToSingleton().CrossContext();
+            injectionBinder.Bind<UIPanelHidedSignal>().ToSingleton().CrossContext();
+            injectionBinder.Bind<UpdateUIPanelSignal>().ToSingleton().CrossContext();
+            injectionBinder.Bind<PlaceUIPanelSignal>().ToSingleton().CrossContext();
+            injectionBinder.Bind<LoadUIPanelSignal>().ToSingleton().CrossContext();
         }
     }
 }
